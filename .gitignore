@@ -22,5 +22,12 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Environment variables
 .env*
-!.env.example
+!.ev-example
+
+# Jira API Configuration
+VITE_JIRA_API_KEY
+VITE_JIRA_BASE_URL
+VITE_JIRA_EMAIL

@@ -5,6 +5,7 @@ import "./App.css";
 import { GeminiTestPanel } from "./components/GeminiTestPanel";
 import { GoogleGenAI } from "@google/genai";
 import { getGeminiConfig } from "./config/environment";
+import { JiraTestPanel } from "./components/jira-test-panel";
 
 function App() {
 	const [count, setCount] = useState(0);
@@ -44,6 +45,10 @@ function App() {
 			<p className="read-the-docs">
 				Click on the Vite and React logos to learn more
 			</p>
+			<div className="min-h-screen bg-gray-100 py-8 space-y-8">
+      <JiraTestPanel />
+      <CsvExportTestPanel />
+    </div>
 		</>
 	);
 }
