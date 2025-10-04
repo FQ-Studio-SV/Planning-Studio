@@ -4,6 +4,7 @@
 - The UI must be built using **custom HTML-based React components**.
 - **Do not install or use** any prebuilt component libraries (Material UI, ShadCN, Chakra, etc.).
 - Style all elements using **Tailwind CSS classes only**.
+- Use spanish as main language for all the text int components and app in general
 
 ## App Flow (3-Step MVP)
 1. **Project Description** → textarea input

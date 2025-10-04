@@ -5,7 +5,7 @@ This project uses **Google Gemini Free-tier Models** as the AI engine for:
 - Processing project descriptions and details
 - Generating user stories and time estimations
 - Producing Jira-ready CSV data
-
+- Use the same natural language that the user use in the prompt (text-area) to the information tha you will generate
 Gemini will be responsible for all **planning and reasoning tasks**, while the React app handles **data collection** and **result rendering**.
 
 ---
@@ -14,4 +14,3 @@ Gemini will be responsible for all **planning and reasoning tasks**, while the R
 - **Provider:** Google AI (Gemini)
 - **Model:** `gemini-2.5-flash` (preferred)
 - **API Access:** via [Google AI Studio](https://makersuite.google.com/app/apikey)
-- **Base Endpoint:**
