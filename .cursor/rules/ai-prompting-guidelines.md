@@ -14,4 +14,3 @@ Gemini will be responsible for all **planning and reasoning tasks**, while the R
 - **Provider:** Google AI (Gemini)
 - **Model:** `gemini-2.5-flash` (preferred)
 - **API Access:** via [Google AI Studio](https://makersuite.google.com/app/apikey)
-- **Base Endpoint:**
