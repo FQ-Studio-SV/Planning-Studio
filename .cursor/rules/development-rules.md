@@ -21,4 +21,3 @@ Each step should be implemented as a **separate React component** and connected 
 ## Cursor AI Instructions
 - When generating code, always reference both `project-overview.md` and `tech-stack-guidelines.md`.
 - Follow the conventions and UI restrictions strictly.
-te

@@ -1,71 +1,219 @@
 @import "tailwindcss";
 
+/* Custom Bermuda color theme */
+@theme static {
+  --color-bermuda-50: #f0fdf9;
+  --color-bermuda-100: #cdfaed;
+  --color-bermuda-200: #9cf3dc;
+  --color-bermuda-300: #67e7ca;
+  --color-bermuda-400: #32cfb1;
+  --color-bermuda-500: #18b498;
+  --color-bermuda-600: #11907c;
+  --color-bermuda-700: #127365;
+  --color-bermuda-800: #135c52;
+  --color-bermuda-900: #154c45;
+  --color-bermuda-950: #052e2a;
+}
 
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+/* Reset and base styles */
+* {
+  box-sizing: border-box;
+  transition: all 0.2s ease-in-out;
+}
+
+html {
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
+  padding: 0;
   min-height: 100vh;
+  background: linear-gradient(135deg, #f0fdf9 0%, #cdfaed 100%);
+  color: #154c45;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+#root {
+  min-height: 100vh;
+  width: 100%;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f0fdf9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #9cf3dc;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #67e7ca;
+}
+
+/* Focus styles */
+*:focus {
+  outline: 2px solid #18b498;
+  outline-offset: 2px;
+}
+
+/* ========================================
+   APP-SPECIFIC STYLES
+   ======================================== */
+
+/* App component styles */
+.App {
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* Utility classes for better spacing and layout */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Button enhancements */
+.btn-primary {
+  background: linear-gradient(135deg, #18b498 0%, #11907c 100%);
+  box-shadow: 0 4px 15px rgba(24, 180, 152, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(24, 180, 152, 0.4);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid #9cf3dc;
+  color: #127365;
+}
+
+.btn-secondary:hover {
+  background: #f0fdf9;
+  border-color: #67e7ca;
+  transform: translateY(-1px);
+}
+
+/* Input enhancements */
+.input-field {
+  background: rgba(255, 255, 255, 0.9);
+  transition: all 0.2s ease;
+}
+
+.input-field:focus {
+  background: white;
+  box-shadow: 0 0 0 3px rgba(24, 180, 152, 0.1);
+}
+
+/* Progress indicator enhancements */
+.progress-step {
+  transition: all 0.3s ease;
+}
+
+.progress-step.active {
+  transform: scale(1.1);
+  box-shadow: 0 4px 15px rgba(24, 180, 152, 0.3);
+}
+
+/* ========================================
+   ENHANCED TITLE STYLES
+   ======================================== */
+
+/* Main title styling with gradient effect */
+.title-main {
+  background: linear-gradient(135deg, #18b498 0%, #11907c 50%, #127365 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 800;
+  position: relative;
+  display: inline-block;
+}
+
+/* Subtitle styling */
+.title-subtitle {
+  color: #127365;
   font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  letter-spacing: 0.01em;
+  opacity: 0.9;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+/* ========================================
+   TITLE ANIMATIONS
+   ======================================== */
+
+/* Title glow animation */
+@keyframes titleGlow {
+  0%, 100% {
+    text-shadow: 0 4px 8px rgba(24, 180, 152, 0.1);
   }
-  a:hover {
-    color: #747bff;
+  50% {
+    text-shadow: 0 4px 16px rgba(24, 180, 152, 0.2), 0 0 20px rgba(24, 180, 152, 0.1);
   }
-  button {
-    background-color: #f9f9f9;
+}
+
+/* Title floating animation */
+@keyframes titleFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
+
+/* Step underline animation */
+@keyframes stepUnderline {
+  0% {
+    width: 0px;
+    opacity: 0;
+  }
+  50% {
+    width: 60px;
+    opacity: 0.8;
+  }
+  100% {
+    width: 60px;
+    opacity: 0.8;
+  }
+}
+
+/* ========================================
+   LOADING ANIMATIONS
+   ======================================== */
+
+/* Pulse animation for loading states */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Fade in up animation for loading tasks */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

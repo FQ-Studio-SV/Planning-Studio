@@ -1,56 +1,45 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
-import { GeminiTestPanel } from "./components/GeminiTestPanel";
-import { GoogleGenAI } from "@google/genai";
-import { getGeminiConfig } from "./config/environment";
-import { JiraTestPanel } from "./components/jira-test-panel";
+import { useAppStore } from './store/app-store';
+import { ProjectDescription } from './components/project-description';
+import { ProjectDetails } from './components/project-details';
+import { ResultsVisualization } from './components/results-visualization';
 
 function App() {
-	const [count, setCount] = useState(0);
+  const { currentStep } = useAppStore();
 
-	const ai = new GoogleGenAI({ apiKey: getGeminiConfig().apiKey });
+  const renderCurrentStep = () => {
+    switch (currentStep) {
+      case 'description':
+        return <ProjectDescription />;
+      case 'details':
+        return <ProjectDetails />;
+      case 'results':
+        return <ResultsVisualization />;
+      default:
+        return <ProjectDescription />;
+    }
+  };
 
-  
-
-	async function main() {
-		const response = await ai.models.generateContent({
-			model: "gemini-2.5-flash",
-			contents: "Why is the sky blue?",
-		});
-		console.log(response.text);
-	}
-
-	return (
-		<>
-			<GeminiTestPanel />
-			<div>
-				<a href="https://vite.dev" target="_blank">
-					<img src={viteLogo} className="logo" alt="Vite logo" />
-				</a>
-				<a href="https://react.dev" target="_blank">
-					<img src={reactLogo} className="logo react" alt="React logo" />
-				</a>
-			</div>
-			<h1>Vite + React</h1>
-			<div className="card">
-				<button onClick={() => main()}>
-					count is {count}
-				</button>
-				<p>
-					Edit <code>src/App.tsx</code> and save to test HMR
-				</p>
-			</div>
-			<p className="read-the-docs">
-				Click on the Vite and React logos to learn more
-			</p>
-			<div className="min-h-screen bg-gray-100 py-8 space-y-8">
-      <JiraTestPanel />
-      <CsvExportTestPanel />
+  return (
+    <div className="min-h-screen w-full bg-white relative">
+      {/* White Sphere Grid Background */}
+      <div
+        className="fixed inset-0 z-0"
+        style={{
+          background: "white",
+          backgroundImage: `
+            linear-gradient(to right, rgba(18,115,101,0.05) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(18,115,101,0.05) 1px, transparent 1px),
+            radial-gradient(circle at 50% 50%, rgba(24,180,152,0.05) 0%, rgba(103,231,202,0.05) 100%, transparent 80%)
+          `,
+          backgroundSize: "32px 32px, 32px 32px, 100% 100%",
+        }}
+      />
+      {/* Your Content/Components */}
+      <div className="relative z-10">
+        {renderCurrentStep()}
+      </div>
     </div>
-		</>
-	);
+  );
 }
 
 export default App;

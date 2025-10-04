@@ -25,7 +25,7 @@
 
 ## 🧩 UI Components
 - Build **custom UI components manually** using plain React and HTML elements.  
-- Use **Tailwind CSS** classes for styling.  
+- Use **Tailwind CSS** classes for styling. Dont create a tailwind.config.ts file, everything must be in the 
 - **Do NOT** install or use any external UI/component libraries, including but not limited to:
   - Material UI (MUI)
   - ShadCN
@@ -72,5 +72,4 @@
 
 ## Build & Run Notes
 - The project uses **Vite** — never use CRA or Next.js commands.  
-- Ensure Tailwind is configured in `tailwind.config.ts`.  
 - Verify styles by running `pnpm dev`.  
