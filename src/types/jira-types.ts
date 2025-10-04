@@ -48,7 +48,8 @@ export interface JiraIssue {
     };
     created: string;
     updated: string;
-    customfield_10016?: number; // Story points field
+    // Campos personalizados - usar Record para flexibilidad
+    [key: string]: any;
   };
 }
 

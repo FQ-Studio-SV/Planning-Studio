@@ -31,7 +31,11 @@ export class JiraApiService {
    */
   async getUsers(): Promise<JiraUser[]> {
     const response = await this.httpClient.get<JiraUser[]>('/users/search');
-    return response.success ? response.data : [];
+    if (!response.success) {
+      console.error('Failed to fetch users:', response.error);
+      throw new Error(response.error || 'Failed to fetch users');
+    }
+    return response.data || [];
   }
 
   /**
@@ -47,7 +51,11 @@ export class JiraApiService {
    */
   async getProjects(): Promise<JiraProject[]> {
     const response = await this.httpClient.get<JiraProject[]>('/project');
-    return response.success ? response.data : [];
+    if (!response.success) {
+      console.error('Failed to fetch projects:', response.error);
+      throw new Error(response.error || 'Failed to fetch projects');
+    }
+    return response.data || [];
   }
 
   /**

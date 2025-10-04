@@ -63,7 +63,7 @@ export class CsvDataConverter {
       projectKey: issue.fields.project.key,
       created: this.formatDate(issue.fields.created),
       updated: this.formatDate(issue.fields.updated),
-      storyPoints: issue.fields.customfield_10016 || '',
+      storyPoints: this.getStoryPoints(issue.fields),
       labels: this.arrayToString((issue.fields as any).labels || []),
       components: this.arrayToString((issue.fields as any).components?.map((c: any) => c.name) || []),
       fixVersions: this.arrayToString((issue.fields as any).fixVersions?.map((v: any) => v.name) || []),
@@ -221,6 +221,34 @@ export class CsvDataConverter {
       default:
         return String(value || '');
     }
+  }
+
+  /**
+   * Obtiene los story points del issue (busca en diferentes campos posibles)
+   */
+  private getStoryPoints(fields: any): number | string {
+    // Buscar en diferentes campos posibles de story points
+    const possibleFields = [
+      'customfield_10016', // Campo común de story points
+      'customfield_10020', // Otro campo común
+      'storyPoints',
+      'story_points',
+      'points'
+    ];
+
+    for (const field of possibleFields) {
+      if (fields[field] !== null && fields[field] !== undefined) {
+        const value = fields[field];
+        if (typeof value === 'number') {
+          return value;
+        }
+        if (typeof value === 'string' && !isNaN(Number(value))) {
+          return Number(value);
+        }
+      }
+    }
+
+    return '';
   }
 
   /**

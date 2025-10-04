@@ -23,10 +23,15 @@ export class JiraHttpClient {
         throw new Error('Jira API is not properly configured');
       }
 
-      const url = `${this.configManager.getBaseUrl()}/rest/api/3${endpoint}`;
+      const url = `${this.configManager.getBaseUrl()}rest/api/3${endpoint}`;
+      
+      // Crear AbortController para timeout
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 segundos timeout
       
       const response = await fetch(url, {
         ...options,
+        signal: controller.signal,
         headers: {
           'Authorization': this.configManager.getAuthHeader(),
           'Content-Type': 'application/json',
@@ -34,6 +39,8 @@ export class JiraHttpClient {
           ...options.headers,
         },
       });
+
+      clearTimeout(timeoutId);
 
       if (!response.ok) {
         const errorText = await response.text();
@@ -47,10 +54,21 @@ export class JiraHttpClient {
       };
     } catch (error) {
       console.error('Jira API request failed:', error);
+      
+      // Manejar diferentes tipos de errores
+      let errorMessage = 'Unknown error occurred';
+      if (error instanceof Error) {
+        if (error.name === 'AbortError') {
+          errorMessage = 'Request timeout - the server took too long to respond';
+        } else {
+          errorMessage = error.message;
+        }
+      }
+      
       return {
         data: null as T,
         success: false,
-        error: error instanceof Error ? error.message : 'Unknown error occurred',
+        error: errorMessage,
       };
     }
   }
